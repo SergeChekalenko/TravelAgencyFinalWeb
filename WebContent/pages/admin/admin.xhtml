@@ -5,100 +5,131 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 
-<h:head></h:head>
-<body>
-	<h:messages />
-	<h:form>
-
-		<h:outputText value="Add new tour type" />
-		<h:panelGrid columns="4" cellpadding="5">
-			<h:outputLabel for="name" value="New Tour Name:"
-				style="font-weight:bold" />
-			<p:inputText id="name" value="#{tourTypeDAOBeanCDI.name}" />
-
-			<p:commandButton value="Add" action="#{tourTypeDAOBeanCDI.createNewTourType()}" update=":subscriptions:addtour" />
-		</h:panelGrid>
-	
-		<br/><br/>
-			
-		<h:outputText value="Add new user" />
-		<h:panelGrid columns="6" cellpadding="5">
-		
-			<h:outputLabel for="userName" value="Name:"	style="font-weight:bold" />
-			<p:inputText id="userName" value="#{userDAOBeanCDI.userName}" />
-			
-			<h:outputLabel for="userPassword" value="Password:"	style="font-weight:bold" />
-			<p:inputText id="userPassword" value="#{userDAOBeanCDI.userPassword}" />
-			
-			<h:outputLabel for="userType" value="User type:" style="font-weight:bold" />
-			<p:inputText id="userType" value="#{userDAOBeanCDI.userType}" />
-			
-			<h:outputLabel for="userAdress" value="Adress:"	style="font-weight:bold" />
-			<p:inputText id="userAdress" value="#{userDAOBeanCDI.userAdress}" />
-
-			<h:outputLabel for="userDiscount" value="Discount:"	style="font-weight:bold" />
-			<p:inputText id="userDiscount" value="#{userDAOBeanCDI.userDiscont}" />
-
-			<p:commandButton value="Create User" action="#{userDAOBeanCDI.createUser()}" />
-
-		</h:panelGrid>
-		
-		<br/><br/></h:form>
+<ui:composition template="/pages/templates/BasicTemplate.xhtml">
+	<ui:define name="content">
+<!-- 		<h:messages /> -->
 		<h:form>
-		<h:outputText value="Delete user" /><br/>
-		<h:selectOneMenu id = "deleteuser" value="#{userDAOBeanCDI.selectedUser}">
-			
-			<f:selectItems id="item2" itemLabel="#{str.userName}" value="#{userDAOBeanCDI.listValuesUsers}"  var="str" />
- 			<f:converter converterId="com.paranoia.converter.UserConverter"/>
-		</h:selectOneMenu>
-		<h:commandButton value="Delete" action="#{userDAOBeanCDI.deleteUser()}" />
+
+			<h:outputText value="Add new tour type" />
+			<h:panelGrid columns="4" cellpadding="5">
+				<h:outputLabel for="name" value="New Tour Name:"
+					style="font-weight:bold" />
+				<p:inputText id="name" value="#{tourTypeDAOBeanCDI.name}" />
+
+				<p:commandButton value="Add"
+					action="#{tourTypeDAOBeanCDI.createNewTourType()}"
+					update=":subscriptions:addtour" />
+			</h:panelGrid>
+
+			<br />
+			<br />
+
+			<h:outputText value="Add new user" />
+			<h:panelGrid columns="6" cellpadding="5">
+
+				<h:outputLabel for="userName" value="Name:" style="font-weight:bold" />
+				<p:inputText id="userName" value="#{userDAOBeanCDI.userName}" />
+
+				<h:outputLabel for="userPassword" value="Password:"
+					style="font-weight:bold" />
+				<p:inputText id="userPassword"
+					value="#{userDAOBeanCDI.userPassword}" />
+
+				<h:outputLabel for="userType" value="User type:"
+					style="font-weight:bold" />
+				<p:inputText id="userType" value="#{userDAOBeanCDI.userType}" />
+
+				<h:outputLabel for="userAdress" value="Adress:"
+					style="font-weight:bold" />
+				<p:inputText id="userAdress" value="#{userDAOBeanCDI.userAdress}" />
+
+				<h:outputLabel for="userDiscount" value="Discount:"
+					style="font-weight:bold" />
+				<p:inputText id="userDiscount" value="#{userDAOBeanCDI.userDiscont}" />
+
+				<p:commandButton value="Create User"
+					action="#{userDAOBeanCDI.createUser()}" />
+
+			</h:panelGrid>
+
+			<br />
+			<br />
+		</h:form>
+		<h:form>
+			<h:outputText value="Delete user" />
+			<br />
+			<h:selectOneMenu id="deleteuser"
+				value="#{userDAOBeanCDI.selectedUser}">
+
+				<f:selectItems id="item2" itemLabel="#{str.userName}"
+					value="#{userDAOBeanCDI.listValuesUsers}" var="str" />
+				<f:converter converterId="com.paranoia.converter.UserConverter" />
+			</h:selectOneMenu>
+			<h:commandButton value="Delete"
+				action="#{userDAOBeanCDI.deleteUser()}" />
 		</h:form>
 
 
-<br/><br/>
-			
-		
+		<br />
+		<br />
 
-<h:form>
-	
-			
-		<h:outputText value="Output selected tou type to console" /><br/>
-		<h:selectOneMenu id="subscriptions"
-			value="#{tourTypeDAOBeanCDI.selectedValue}">
-			
-			<f:selectItems id="item1" itemLabel="#{str.tourTypeName}" value="#{tourTypeDAOBeanCDI.listValues}"  var="str" />
- 			<f:converter converterId="com.paranoia.converter.StringConverter"/>
-		</h:selectOneMenu>
-		<h:commandButton value="Register" action="#{tourTypeDAOBeanCDI.systemout}" />
 
-	<br/><br/>
-			
-		<h:outputText value="Delete tour type" /><br/>
-		<h:selectOneMenu id = "delete" value="#{tourTypeDAOBeanCDI.selectedValue}">
-			
-			<f:selectItems id="item2" itemLabel="#{str.tourTypeName}" value="#{tourTypeDAOBeanCDI.listValues}"  var="str" />
- 			<f:converter converterId="com.paranoia.converter.StringConverter"/>
-		</h:selectOneMenu>
-		<h:commandButton value="Delete" action="#{tourTypeDAOBeanCDI.deleteTourType()}" />
 
-	</h:form>
-	
-	<h:form id="subscriptions">
-		<br/><br/>
-			
-		<h:outputText value="Create tour" /><br/>
-		<h:selectOneMenu id = "addtour" value="#{tourDAOBeanCDI.tourTypeTourDAOBean}">
-			
-			<f:selectItems id="item3" itemLabel="#{str.tourTypeName}" value="#{tourTypeDAOBeanCDI.listValues}"  var="str" />
- 			<f:converter converterId="com.paranoia.converter.StringConverter"/>
-		
-		</h:selectOneMenu>
-		
-			<h:outputLabel for="tourprice" value="Price:"	style="font-weight:bold" />
+		<h:form>
+
+
+			<h:outputText value="Output selected tou type to console" />
+			<br />
+			<h:selectOneMenu id="subscriptions"
+				value="#{tourTypeDAOBeanCDI.selectedValue}">
+
+				<f:selectItems id="item1" itemLabel="#{str.tourTypeName}"
+					value="#{tourTypeDAOBeanCDI.listValues}" var="str" />
+				<f:converter converterId="com.paranoia.converter.StringConverter" />
+			</h:selectOneMenu>
+			<h:commandButton value="Register"
+				action="#{tourTypeDAOBeanCDI.systemout}" />
+
+			<br />
+			<br />
+
+			<h:outputText value="Delete tour type" />
+			<br />
+			<h:selectOneMenu id="delete"
+				value="#{tourTypeDAOBeanCDI.selectedValue}">
+
+				<f:selectItems id="item2" itemLabel="#{str.tourTypeName}"
+					value="#{tourTypeDAOBeanCDI.listValues}" var="str" />
+				<f:converter converterId="com.paranoia.converter.StringConverter" />
+			</h:selectOneMenu>
+			<h:commandButton value="Delete"
+				action="#{tourTypeDAOBeanCDI.deleteTourType()}" />
+
+		</h:form>
+
+		<h:form id="subscriptions">
+			<br />
+			<br />
+
+			<h:outputText value="Create tour" />
+			<br />
+			<h:selectOneMenu id="addtour"
+				value="#{tourDAOBeanCDI.tourTypeTourDAOBean}">
+
+				<f:selectItems id="item3" itemLabel="#{str.tourTypeName}"
+					value="#{tourTypeDAOBeanCDI.listValues}" var="str" />
+				<f:converter converterId="com.paranoia.converter.StringConverter" />
+
+			</h:selectOneMenu>
+
+			<h:outputLabel for="tourprice" value="Price:"
+				style="font-weight:bold" />
 			<p:inputText id="tourprice" value="#{tourDAOBeanCDI.price}" />
-			
-		<h:commandButton value="Add Tour" action="#{tourDAOBeanCDI.createTour()}" />
-		
-	</h:form>
-</body>
+
+			<h:commandButton value="Add Tour"
+				action="#{tourDAOBeanCDI.createTour()}" />
+
+		</h:form>
+	</ui:define>
+</ui:composition>
 </html>
